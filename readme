@@ -1,0 +1,70 @@
+# Image Optimizer
+
+Cet outil permet d'optimiser et de redimensionner des images en lot, tout en préservant la structure des dossiers.
+
+## Configuration
+
+Les paramètres principaux peuvent être modifiés directement dans le fichier `index.js` :
+
+1. Formats d'image à traiter :
+   Modifiez la constante `IMAGE_FORMATS` au début du fichier.
+   ```javascript
+   const IMAGE_FORMATS = ['.jpg', '.jpeg', '.png', '.webp'];
+
+2. Largeur maximale des images :
+Modifiez la constante MAX_WIDTH au début du fichier.
+javascriptconst MAX_WIDTH = 1200;
+
+3.  Format de sortie par défaut :
+Modifiez l'option format dans la configuration de program.
+javascript.option('-f, --format <type>', 'Format de sortie (webp, jpeg, png)', 'webp')
+
+4. Qualité de compression par défaut :
+Modifiez l'option quality dans la configuration de program.
+javascript.option('-q, --quality <number>', 'Qualité de compression (1-100)', '80')
+
+5. Pourcentage de redimensionnement par défaut :
+Modifiez l'option scale dans la configuration de program.
+javascript.option('-s, --scale <number>', 'Échelle de redimensionnement en pourcentage', '50')
+
+
+6. Installation
+
+Assurez-vous d'avoir Node.js installé sur votre système.
+Clonez ou téléchargez ce repository.
+Dans le dossier du projet, exécutez npm install pour installer les dépendances.
+
+7. Utilisation
+
+Placez le dossier d'images à optimiser dans le répertoire DepositFolder/.
+Ouvrez un terminal dans le dossier du projet.
+Exécutez la commande suivante :
+npm start -- -i DepositFolder/NomDuDossier -f webp -q 80 -s 50
+Options :
+
+-i ou --input : Chemin du dossier d'entrée (obligatoire)
+-f ou --format : Format de sortie (webp, jpeg, png)
+-q ou --quality : Qualité de compression (1-100)
+-s ou --scale : Échelle de redimensionnement en pourcentage
+
+Exemple avec toutes les options :
+npm start -- -i DepositFolder/MonDossierImages -f png -q 90 -s 75
+
+Les images optimisées seront placées dans OutputFolder/NomDuDossier-optimized/.
+
+8. Fonctionnalités
+
+Optimise les images JPG, JPEG, PNG et WebP.
+Convertit les images vers le format spécifié (WebP par défaut).
+Redimensionne les images selon le pourcentage spécifié.
+Limite la largeur maximale des images à 1200px (ou la valeur spécifiée dans MAX_WIDTH).
+Préserve le ratio d'aspect des images.
+Maintient la structure des dossiers dans le répertoire de sortie.
+Copie les fichiers non-image sans modification.
+
+9. Notes importantes
+
+Les fichiers qui ne sont pas des images (ou qui ne sont pas dans les formats spécifiés) seront copiés sans modification dans le dossier de sortie.
+La structure des dossiers est préservée dans le dossier de sortie.
+Assurez-vous d'avoir suffisamment d'espace disque pour les images optimisées.
+La largeur maximale est appliquée après le redimensionnement en pourcentage.

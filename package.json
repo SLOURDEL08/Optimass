@@ -1,0 +1,12 @@
+{
+  "name": "optimass",
+  "version": "1.0.0",
+  "description": "Cet outil permet d'optimiser et de redimensionner des images en lot, tout en préservant la structure des dossiers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
