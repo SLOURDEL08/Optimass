@@ -150,4 +150,59 @@ router.post('/clean', async (req, res) => {
  }
 });
 
+router.post('/optimize/advanced', async (req, res) => {
+  const {
+    batchSettings,
+    compressionSettings,
+    resizeSettings,
+    watermarkSettings,
+    files
+  } = req.body;
+
+  try {
+    // 1. Appliquer les paramètres de lot
+    const batchResults = await optimizationService.applyBatchSettings(files, batchSettings);
+
+    // 2. Appliquer la compression
+    const compressedResults = await optimizationService.applyCompression(
+      batchResults,
+      compressionSettings
+    );
+
+    // 3. Appliquer le redimensionnement
+    const resizedResults = await optimizationService.applyResize(
+      compressedResults,
+      resizeSettings
+    );
+
+    // 4. Appliquer le filigrane si nécessaire
+    const finalResults = watermarkSettings
+      ? await optimizationService.applyWatermark(resizedResults, watermarkSettings)
+      : resizedResults;
+
+    res.json({
+      success: true,
+      results: finalResults
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Endpoints pour sauvegarder/charger les préréglages
+router.post('/presets', async (req, res) => {
+  // Sauvegarder un nouveau préréglage
+});
+
+router.get('/presets', async (req, res) => {
+  // Récupérer tous les préréglages
+});
+
+router.delete('/presets/:id', async (req, res) => {
+  // Supprimer un préréglage
+});
+
 module.exports = router;
